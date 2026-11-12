@@ -1,0 +1,2 @@
+export type Quality='auto'|'low'|'medium'|'high';
+export class QualityManager{level=1;private elapsed=0;private frames=0;set(q:Quality){this.level=q==='high'?2:q==='low'?0:1;this.elapsed=0;this.frames=0;}sample(dt:number,auto:boolean){if(!auto)return false;this.elapsed+=dt;this.frames++;if(this.elapsed>3){const fps=this.frames/this.elapsed;this.elapsed=0;this.frames=0;if(fps<27&&this.level>0){this.level--;return true;}}return false;}get pixelRatio(){return Math.min(window.devicePixelRatio||1,[1,1.4,1.8][this.level]);}}

@@ -1,0 +1,114 @@
+{
+  "generated": "2026-11-12T16:21:41.516Z",
+  "assets": [
+    {
+      "file": "battery-C6np8Cuo.js",
+      "bytes": 953,
+      "gzip": 554
+    },
+    {
+      "file": "energy-DgBtlfMx.js",
+      "bytes": 1134,
+      "gzip": 640
+    },
+    {
+      "file": "gears-CbVD4MkW.js",
+      "bytes": 790,
+      "gzip": 460
+    },
+    {
+      "file": "index-5pew2boB.js",
+      "bytes": 264821,
+      "gzip": 83972
+    },
+    {
+      "file": "index-CKg05Yrr.css",
+      "bytes": 18173,
+      "gzip": 4754
+    },
+    {
+      "file": "motor-DrzQuID5.js",
+      "bytes": 1118,
+      "gzip": 587
+    },
+    {
+      "file": "primitives-B-iT0ngw.js",
+      "bytes": 1374,
+      "gzip": 778
+    },
+    {
+      "file": "regen-D--6y_gx.js",
+      "bytes": 136,
+      "gzip": 130
+    },
+    {
+      "file": "renderer-CU_k_3TQ.js",
+      "bytes": 11220,
+      "gzip": 4697
+    },
+    {
+      "file": "three-BUbp3WSG.js",
+      "bytes": 532196,
+      "gzip": 139070
+    }
+  ],
+  "initialJSGzip": 83972,
+  "scenes": {
+    "energy": {
+      "urls": [
+        "/assets/renderer-CU_k_3TQ.js",
+        "/assets/index-5pew2boB.js",
+        "/assets/index-CKg05Yrr.css",
+        "/assets/three-BUbp3WSG.js",
+        "/assets/energy-DgBtlfMx.js",
+        "/assets/primitives-B-iT0ngw.js"
+      ],
+      "bytes": 828918
+    },
+    "motor": {
+      "urls": [
+        "/assets/renderer-CU_k_3TQ.js",
+        "/assets/index-5pew2boB.js",
+        "/assets/index-CKg05Yrr.css",
+        "/assets/three-BUbp3WSG.js",
+        "/assets/motor-DrzQuID5.js",
+        "/assets/primitives-B-iT0ngw.js"
+      ],
+      "bytes": 828902
+    },
+    "gears": {
+      "urls": [
+        "/assets/renderer-CU_k_3TQ.js",
+        "/assets/index-5pew2boB.js",
+        "/assets/index-CKg05Yrr.css",
+        "/assets/three-BUbp3WSG.js",
+        "/assets/gears-CbVD4MkW.js",
+        "/assets/primitives-B-iT0ngw.js"
+      ],
+      "bytes": 828574
+    },
+    "regen": {
+      "urls": [
+        "/assets/renderer-CU_k_3TQ.js",
+        "/assets/index-5pew2boB.js",
+        "/assets/index-CKg05Yrr.css",
+        "/assets/three-BUbp3WSG.js",
+        "/assets/regen-D--6y_gx.js",
+        "/assets/energy-DgBtlfMx.js",
+        "/assets/primitives-B-iT0ngw.js"
+      ],
+      "bytes": 829054
+    },
+    "battery": {
+      "urls": [
+        "/assets/renderer-CU_k_3TQ.js",
+        "/assets/index-5pew2boB.js",
+        "/assets/index-CKg05Yrr.css",
+        "/assets/three-BUbp3WSG.js",
+        "/assets/battery-C6np8Cuo.js",
+        "/assets/primitives-B-iT0ngw.js"
+      ],
+      "bytes": 828737
+    }
+  }
+}
