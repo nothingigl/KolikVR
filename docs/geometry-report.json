@@ -1,0 +1,26 @@
+{
+  "note": "CPU geometry counts, not GPU performance measurements",
+  "models": [
+    {
+      "model": "model3",
+      "meshes": 298,
+      "instancedElements": 192,
+      "uniqueGeometries": 85,
+      "triangles": 38138
+    },
+    {
+      "model": "ioniq5",
+      "meshes": 310,
+      "instancedElements": 192,
+      "uniqueGeometries": 84,
+      "triangles": 38282
+    },
+    {
+      "model": "leaf",
+      "meshes": 309,
+      "instancedElements": 192,
+      "uniqueGeometries": 84,
+      "triangles": 37708
+    }
+  ]
+}

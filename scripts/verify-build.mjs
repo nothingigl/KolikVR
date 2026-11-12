@@ -1,0 +1,5 @@
+import assert from'node:assert/strict';import{readFile,stat}from'node:fs/promises';
+const manifest=JSON.parse(await readFile('dist/offline-manifest.json','utf8'));const vite=JSON.parse(await readFile('dist/.vite/manifest.json','utf8'));const renderer=vite['src/views/renderer.ts'];const report=JSON.parse(await readFile('dist/build-report.json','utf8'));
+for(const [id,scene]of Object.entries(manifest.scenes)){assert.ok(scene.urls.includes(scene.entry),`${id}: offline scene missing its entrypoint`);assert.ok(renderer.dynamicImports.some(k=>'/'+vite[k].file===scene.entry),`${id}: entrypoint is not a renderer route`);for(const url of scene.urls)assert.ok((await stat('dist'+url)).isFile());}
+for(const [key,chunk]of Object.entries(vite))if(key.includes('renderer')||key.includes('three')||chunk.isDynamicEntry)assert.ok(!manifest.shell.includes('/'+chunk.file),'3D or optional code in initial shell: '+key);
+assert.ok(report.initialJSGzip<300*1024,'Initial JavaScript budget exceeded');console.log('Build verified: all five offline entries/dependencies, lazy 3D/audio, initial JS budget.');

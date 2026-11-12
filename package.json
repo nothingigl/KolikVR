@@ -1,1 +1,27 @@
-{"name":"autoscope-kolikvr","version":"1.0.0","private":true,"type":"module","scripts":{"dev":"vite --host 0.0.0.0","build":"tsc -b && vite build && node scripts/finalize.mjs","preview":"vite preview --host 0.0.0.0","test":"tsx --test tests/*.test.ts"},"dependencies":{"react":"^19.2.0","react-dom":"^19.2.0","three":"^0.181.0"},"devDependencies":{"@types/node":"^26.6.6","@types/react":"^19.2.0","@types/react-dom":"^19.2.0","@types/three":"^0.181.0","@vitejs/plugin-react":"^5.1.0","tsx":"^4.20.6","typescript":"^5.9.3","vite":"^7.2.0"}}
+{
+  "name": "autoscope-kolikvr",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "tsc -b && vite build && node scripts/finalize.mjs && node scripts/verify-build.mjs",
+    "preview": "vite preview --host 0.0.0.0",
+    "test": "tsx --test tests/*.test.ts"
+  },
+  "dependencies": {
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "three": "^0.181.0"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "@types/three": "^0.181.0",
+    "@vitejs/plugin-react": "^5.1.0",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3",
+    "vite": "^7.2.0"
+  }
+}

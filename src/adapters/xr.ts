@@ -1,9 +1,10 @@
+import {garageText as gt} from '../i18n/garage';
 import { ui } from '../i18n/ui';
 import * as T from 'three';
 import type { Simulation, ModuleId } from '../sim/model';
 import { modules, ru } from '../i18n/ru';
 export type XRCallbacks = {
-    scene: (id: ModuleId) => void;
+    scene: (id: ModuleId) => void; vehicle?:()=>void; doors?:()=>void; hood?:()=>void; lights?:()=>void;
     explode: () => void;
     shell: () => void;
     status: (s: string) => void;
@@ -24,7 +25,7 @@ export function xrControls(renderer: T.WebGLRenderer, scene: T.Scene, model: T.G
     detailCanvas.height = 256;
     const detailTexture = new T.CanvasTexture(detailCanvas);
     const detailMesh = new T.Mesh(new T.PlaneGeometry(1.8, .45), new T.MeshBasicMaterial({ map: detailTexture }));
-    detailMesh.position.set(0, -.92, .01);
+    detailMesh.position.set(0, -1.2, .01);
     panel.add(detailMesh);
     const choose = (part: string) => { callbacks.select(part); detail = (ru.parts[part] ?? ru.parts.shell).join(': '); };
     const labelCanvas = document.createElement('canvas');
@@ -40,6 +41,7 @@ export function xrControls(renderer: T.WebGLRenderer, scene: T.Scene, model: T.G
         string,
         () => void
     ][] = [[ui.text125, () => sim.running ? sim.pause() : sim.start()], [ui.text126, () => { current = (current + 1) % modules.length; callbacks.scene(modules[current].id); }], [ui.text127, () => sim.reset()], [ui.text128, adjust('throttle', .25, 0, 1)], [ui.text129, adjust('brake', .25, 0, 1)], [ui.text130, adjust('initialSoc', 10, 10, 100)], [ui.text131, adjust('load', .25, 0, 1)], [ui.text132, adjust('ratio', 1, 3, 10)], [ui.text133, adjust('turn', .5, -1, 1)], [ui.text134, () => sim.setParameter('cooling', !sim.params.cooling)], [ui.text135, adjust('demoSpeed', .5, .25, 2)], [ui.text136, () => { const keys = Object.keys(ru.parts); selected = (selected + 1) % keys.length; choose(keys[selected]); }], [ui.text137, callbacks.explode], [ui.text138, callbacks.shell], [ui.text139, () => { model.position.set(0, 1.7, -2.7); model.rotation.set(0, 0, 0); }], [ui.text140, () => { model.rotation.y += Math.PI / 8; }], [ui.text141, () => void renderer.xr.getSession()?.end()]];
+    if(callbacks.vehicle)actions.push(['Следующий автомобиль',callbacks.vehicle]);if(callbacks.doors)actions.push([gt.doors,callbacks.doors]);if(callbacks.hood)actions.push([gt.hood,callbacks.hood]);if(callbacks.lights)actions.push([gt.lights,callbacks.lights]);
     actions.forEach(([text, fn], i) => button(text, (i % 3 - 1) * .59, .42 - Math.floor(i / 3) * .18, fn));
     const ray = new T.Raycaster(), rotation = new T.Matrix4();
     const held = new Set<T.Group>();
@@ -53,7 +55,7 @@ export function xrControls(renderer: T.WebGLRenderer, scene: T.Scene, model: T.G
         const select = () => { rotation.identity().extractRotation(controller.matrixWorld); ray.ray.origin.setFromMatrixPosition(controller.matrixWorld); ray.ray.direction.set(0, 0, -1).applyMatrix4(rotation); const hit = ray.intersectObjects(targets, false)[0]; if (hit) {
             (hit.object.userData.action as () => void)();
             return;
-        } const partHit = ray.intersectObject(model, true)[0]; if (partHit?.object.userData.part)
+        } const partHit = ray.intersectObject(model, true).find(h=>{let o:T.Object3D|null=h.object;while(o){if(!o.visible)return false;o=o.parent;}return !!h.object.userData.part;}); if (partHit?.object.userData.part)
             choose(partHit.object.userData.part); };
         const squeeze = () => { controller.attach(model); held.add(controller); };
         const release = () => { scene.attach(model); held.delete(controller); };

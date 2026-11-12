@@ -1,5 +1,6 @@
+import type {Vehicle} from '../data/vehicles';
 import * as T from 'three';import{kit,colors as c,finish}from'./primitives';
-export function build(ratio=9){const root=new T.Group(),k=kit(root);const small=12,large=small*ratio;const module=2.4/(small+large);const r1=small*module/2,r2=large*module/2;
+export function build(ratio=9,_vehicle?:Vehicle){const root=new T.Group(),k=kit(root);const small=12,large=small*ratio;const module=2.4/(small+large);const r1=small*module/2,r2=large*module/2;
  const a=k.gear(small,module,[-r2,0,0],c.copper);a.userData.spin='motor';
  const b=k.gear(large,module,[r1,0,0],c.green);b.rotation.z=Math.PI/large;b.userData.spin='wheel';b.userData.phase=Math.PI/large;
  k.cyl(.06,1,[-r2,0,0],c.metal,'gears').rotation.set(Math.PI/2,0,0);
