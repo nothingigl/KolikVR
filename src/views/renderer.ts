@@ -12,7 +12,7 @@ function release(group: T.Group) { const geometries = new Set<T.BufferGeometry>(
 export async function createView(host: HTMLElement, sim: Simulation, callbacks: XRCallbacks & {
     fallback: () => void;
     fps: (fps: number) => void;
-}) {
+}, initialModule: ModuleId = 'energy') {
     const scene = new T.Scene();
     scene.background = new T.Color(0x111815);
     const camera = new T.PerspectiveCamera(38, 1, .05, 100);
@@ -34,7 +34,7 @@ export async function createView(host: HTMLElement, sim: Simulation, callbacks: 
     const controls = orbit(renderer.domElement, camera, new T.Vector3(0, .2, 0));
     const xr = xrControls(renderer, scene, model, sim, callbacks);
     const qm = new QualityManager();
-    let quality: Quality = 'auto', id: ModuleId = 'energy', disposed = false, version = 0, explode = false, hide = true, selected = '', ratio = sim.params.ratio;
+    let quality: Quality = 'auto', id: ModuleId = initialModule, disposed = false, version = 0, explode = false, hide = true, selected = '', ratio = sim.params.ratio;
     const size = () => { const w = host.clientWidth, h = host.clientHeight; camera.aspect = w / Math.max(h, 1); camera.updateProjectionMatrix(); renderer.setSize(w, h); renderer.setPixelRatio(qm.pixelRatio); };
     const observer = new ResizeObserver(size);
     observer.observe(host);

@@ -23,8 +23,8 @@ export default function App() {
     } }), [state, setState] = useState({ ...sim.state }), [running, setRunning] = useState(false), [params, setParams] = useState({ ...sim.params }), [selected, setSelected] = useState('battery'), [explode, setExplode] = useState(false), [hide, setHide] = useState(true), [message, setMessage] = useState(''), [loading, setLoading] = useState(false), [xrSupported, setXRSupported] = useState(false), [fps, setFps] = useState(0), [saved, setSaved] = useState<Partial<Record<ModuleId, boolean>>>({}), [saving, setSaving] = useState(false), [offlineManifest, setOfflineManifest] = useState<OfflineManifest | null>(null), [update, setUpdate] = useState<ServiceWorker | null>(null), [install, setInstall] = useState<InstallEvent | null>(null), [online, setOnline] = useState(navigator.onLine), [panelOpen, setPanelOpen] = useState(true), [stereo, setStereo] = useState(35);
     const host = useRef<HTMLDivElement>(null), view = useRef<View | null>(null);
     const description = modules.find(m => m.id === id)!;
-    const callbackRef = useRef({ setId, setExplode, setHide, setSelected });
-    callbackRef.current = { setId, setExplode, setHide, setSelected };
+    const callbackRef = useRef({ setId, setExplode, setHide, setSelected, id });
+    callbackRef.current = { setId, setExplode, setHide, setSelected, id };
     useEffect(() => { let raf = 0, last = 0, ui = 0; const tick = (t: number) => { const dt = last ? Math.min((t - last) / 1000, .1) : 0; last = t; if (!document.hidden) {
         if (!sim.xrActive) sim.advance(dt);
         if (t - ui > 100) {
@@ -36,7 +36,7 @@ export default function App() {
     } raf = requestAnimationFrame(tick); }; raf = requestAnimationFrame(tick); const keyboard = (e: KeyboardEvent) => { if (e.code === 'Space' && !['INPUT', 'BUTTON', 'SELECT', 'TEXTAREA'].includes((e.target as HTMLElement).tagName) && active && tab < 2) {
         e.preventDefault();
         sim.running ? sim.pause() : sim.start();
-    } }; window.addEventListener('keydown', keyboard); return () => { cancelAnimationFrame(raf); window.removeEventListener('keydown', keyboard); sim.pause(); }; }, [sim, active, tab]);
+    } }; window.addEventListener('keydown', keyboard); return () => { cancelAnimationFrame(raf); window.removeEventListener('keydown', keyboard); }; }, [sim, active, tab]);
     useEffect(() => { let live = true; try {
         navigator.xr?.isSessionSupported('immersive-vr').then(v => { if (live)
             setXRSupported(v); }).catch(() => setXRSupported(false));
@@ -53,11 +53,11 @@ export default function App() {
     catch { } })); return () => { live = false; }; }, [offlineManifest]);
     useEffect(() => { if (!active || mode !== '3d' || tab > 1 || !host.current)
         return; let cancelled = false; let local: View | null = null; setLoading(true); import('./views/renderer').then(m => { if (cancelled || !host.current)
-        return; return m.createView(host.current, sim, { scene: v => callbackRef.current.setId(v), explode: () => callbackRef.current.setExplode(v => !v), shell: () => callbackRef.current.setHide(v => !v), select: v => callbackRef.current.setSelected(v), status: setMessage, fps: setFps, fallback: () => { setMessage(ui.text2); setMode('2d'); } }); }).then(v => { if (!v)
+        return; return m.createView(host.current, sim, { scene: v => callbackRef.current.setId(v), explode: () => callbackRef.current.setExplode(v => !v), shell: () => callbackRef.current.setHide(v => !v), select: v => callbackRef.current.setSelected(v), status: setMessage, fps: setFps, fallback: () => { setMessage(ui.text2); setMode('2d'); } }, callbackRef.current.id); }).then(v => { if (!v)
         return; local = v; if (cancelled) {
         v.dispose();
         return;
-    } view.current = v; v.setQuality(quality); v.setExplode(explode); v.setShell(hide); v.select(selected); return v.load(id); }).catch(() => { if (!cancelled) {
+    } view.current = v; v.setQuality(quality); v.setExplode(explode); v.setShell(hide); v.select(selected); return v.load(callbackRef.current.id); }).catch(() => { if (!cancelled) {
         setMode('2d');
         setMessage(ui.text3);
     } }).finally(() => { if (!cancelled)

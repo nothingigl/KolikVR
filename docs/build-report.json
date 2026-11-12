@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-12T16:21:41.516Z",
+  "generated": "2026-11-12T16:23:43.394Z",
   "assets": [
     {
       "file": "battery-C6np8Cuo.js",
@@ -17,14 +17,14 @@
       "gzip": 460
     },
     {
-      "file": "index-5pew2boB.js",
-      "bytes": 264821,
-      "gzip": 83972
-    },
-    {
       "file": "index-CKg05Yrr.css",
       "bytes": 18173,
       "gzip": 4754
+    },
+    {
+      "file": "index-abGStVaz.js",
+      "bytes": 264847,
+      "gzip": 83978
     },
     {
       "file": "motor-DrzQuID5.js",
@@ -42,9 +42,9 @@
       "gzip": 130
     },
     {
-      "file": "renderer-CU_k_3TQ.js",
-      "bytes": 11220,
-      "gzip": 4697
+      "file": "renderer-PrBT3UVo.js",
+      "bytes": 11227,
+      "gzip": 4695
     },
     {
       "file": "three-BUbp3WSG.js",
@@ -52,63 +52,63 @@
       "gzip": 139070
     }
   ],
-  "initialJSGzip": 83972,
+  "initialJSGzip": 83978,
   "scenes": {
     "energy": {
       "urls": [
-        "/assets/renderer-CU_k_3TQ.js",
-        "/assets/index-5pew2boB.js",
+        "/assets/renderer-PrBT3UVo.js",
+        "/assets/index-abGStVaz.js",
         "/assets/index-CKg05Yrr.css",
         "/assets/three-BUbp3WSG.js",
         "/assets/energy-DgBtlfMx.js",
         "/assets/primitives-B-iT0ngw.js"
       ],
-      "bytes": 828918
+      "bytes": 828951
     },
     "motor": {
       "urls": [
-        "/assets/renderer-CU_k_3TQ.js",
-        "/assets/index-5pew2boB.js",
+        "/assets/renderer-PrBT3UVo.js",
+        "/assets/index-abGStVaz.js",
         "/assets/index-CKg05Yrr.css",
         "/assets/three-BUbp3WSG.js",
         "/assets/motor-DrzQuID5.js",
         "/assets/primitives-B-iT0ngw.js"
       ],
-      "bytes": 828902
+      "bytes": 828935
     },
     "gears": {
       "urls": [
-        "/assets/renderer-CU_k_3TQ.js",
-        "/assets/index-5pew2boB.js",
+        "/assets/renderer-PrBT3UVo.js",
+        "/assets/index-abGStVaz.js",
         "/assets/index-CKg05Yrr.css",
         "/assets/three-BUbp3WSG.js",
         "/assets/gears-CbVD4MkW.js",
         "/assets/primitives-B-iT0ngw.js"
       ],
-      "bytes": 828574
+      "bytes": 828607
     },
     "regen": {
       "urls": [
-        "/assets/renderer-CU_k_3TQ.js",
-        "/assets/index-5pew2boB.js",
+        "/assets/renderer-PrBT3UVo.js",
+        "/assets/index-abGStVaz.js",
         "/assets/index-CKg05Yrr.css",
         "/assets/three-BUbp3WSG.js",
         "/assets/regen-D--6y_gx.js",
         "/assets/energy-DgBtlfMx.js",
         "/assets/primitives-B-iT0ngw.js"
       ],
-      "bytes": 829054
+      "bytes": 829087
     },
     "battery": {
       "urls": [
-        "/assets/renderer-CU_k_3TQ.js",
-        "/assets/index-5pew2boB.js",
+        "/assets/renderer-PrBT3UVo.js",
+        "/assets/index-abGStVaz.js",
         "/assets/index-CKg05Yrr.css",
         "/assets/three-BUbp3WSG.js",
         "/assets/battery-C6np8Cuo.js",
         "/assets/primitives-B-iT0ngw.js"
       ],
-      "bytes": 828737
+      "bytes": 828770
     }
   }
 }
